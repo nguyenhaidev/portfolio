@@ -1,24 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route, useRoutes } from "react-router-dom";
+import "./App.css";
+import Home from "src/pages/Home";
+import Layout from "src/components/Layout";
+import { ChakraProvider } from "@chakra-ui/react";
+import About from "./pages/About";
 
 function App() {
+  const elements = useRoutes([
+    {
+      path: "/",
+      element: <Home />,
+    },
+    {
+      path: "/work",
+      element: <>Work</>,
+    },
+    {
+      path: "/contact",
+      element: <>Contact</>,
+    },
+
+    {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/blogs",
+      element: <>Blogs</>,
+    },
+    {
+      path: "/blogs/:id",
+      element: <>Post detail</>,
+    },
+    {
+      path: "*",
+      element: <>Not found</>,
+    },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="Apph-screen w-full m-h-screen flex justify-center items-baseline bg-black text-zinc-200">
+      <ChakraProvider>
+        <Layout>{elements}</Layout>
+      </ChakraProvider>
     </div>
   );
 }

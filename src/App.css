@@ -1,3 +1,26 @@
+* {
+  font-family: "Varela Round", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #06b6d4;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
+
+html {
+  overflow-y: scroll;
+  overflow-y: overlay;
+}
+
 .App {
   text-align: center;
 }
