@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 import { AppProps } from "src/types";
 import Footer from "./Footer/Footer";
 import Navbar from "./Navbar/Navbar";

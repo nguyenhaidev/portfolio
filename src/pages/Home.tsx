@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useCallback, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { joinClass } from "src/services";
@@ -92,7 +93,7 @@ const Home = () => {
   const renderWorkItem = useCallback(
     () =>
       works.map((e, idx) => (
-        <div className="my-5" key={idx}>
+        <div className="my-5 z-10" key={idx}>
           <Link to={`blogs/${e.id}`} className="font-semibold relative">
             <div className="group w-full rounded-md bg-slate-300 overflow-hidden relative shadow-lg hover:shadow-cyan-500/50">
               <img
@@ -101,7 +102,7 @@ const Home = () => {
                 alt={e.label}
               />
               <div className="group invisible absolute h-full w-full duration-300 top-0 group-hover:bg-slate-900/80 group-hover:visible flex items-center justify-center">
-                <div className="text-center invisible group-hover:visible group-hover:scale-100 scale-75 duration-200 absolute text-cyan-500 p-5">
+                <div className="text-center  group-hover:scale-100 scale-75 duration-200 absolute text-cyan-500 p-5">
                   <div className="uppercase text-2xl">{e.label}</div>
                   <div className="mt-3 text-white">{e.description}</div>
                 </div>
@@ -110,27 +111,35 @@ const Home = () => {
           </Link>
         </div>
       )),
-    [posts]
+    [works]
   );
 
   return (
     <div className="w-full max-w-3xl px-5 flex flex-col justify-start items-start">
-      <div className="introduce py-[10rem]">
-        <div className="text-5xl font-semibold">{renderTitle()}</div>
-        <div className="text-2xl italic mt-3" style={style["font-satisfy"]}>
-          I am a web developer based in Ho Chi Minh City, Viet Nam.
-          <br />
-          Currently, I'm working at
-          <span className="text-cyan-500 ml-2" style={style["font-satisfy"]}>
-            TMA Solution
-          </span>
-        </div>
-        <NavLink
-          to="/about"
-          className="flex items-center justify-center gap-2 mt-3 py-2 w-[100px] text-cyan-500 hover:text-zinc-200 border-cyan-500 border rounded-full hover:bg-cyan-500 shadow-lg hover:shadow-cyan-500/50"
+      <div className="introduce min-h-screen flex items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+          }}
         >
-          <i className="fa-solid fa-magnifying-glass" /> About
-        </NavLink>
+          <div className="text-5xl font-semibold">{renderTitle()}</div>
+          <div className="text-2xl italic mt-3" style={style["font-satisfy"]}>
+            I am a web developer based in Ho Chi Minh City, Viet Nam.
+            <br />
+            Currently, I'm working at
+            <span className="text-cyan-500 ml-2" style={style["font-satisfy"]}>
+              TMA Solution
+            </span>
+          </div>
+          <NavLink
+            to="/about"
+            className="flex items-center justify-center gap-2 mt-3 py-2 w-[100px] text-cyan-500 hover:text-zinc-200 border-cyan-500 border rounded-full hover:bg-cyan-500 shadow-lg hover:shadow-cyan-500/50"
+          >
+            <i className="fa-solid fa-magnifying-glass" /> About
+          </NavLink>
+        </motion.div>
       </div>
       <div id="recent-post">
         <label htmlFor="recent-post" className="uppercase text-cyan-500">
@@ -150,12 +159,12 @@ const Home = () => {
   );
 };
 
-export interface LinkButton extends AppProps {
+export interface LinkButtonProps extends AppProps {
   to: string;
   label: string;
 }
 
-const LinkButton = (props: LinkButton) => (
+const LinkButton = (props: LinkButtonProps) => (
   <Link
     to={props.to}
     className={joinClass(["group flex items-center", props.className])}

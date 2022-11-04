@@ -1,9 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { AppProps } from "src/types";
 import { joinClass } from "src/services";
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
-import { Form } from "react-router-dom";
 
 export interface FooterProps extends AppProps {}
 

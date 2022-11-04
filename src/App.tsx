@@ -1,19 +1,35 @@
-import { Routes, Route, useRoutes } from "react-router-dom";
+import { useLocation, useRoutes } from "react-router-dom";
 import "./App.css";
 import Home from "src/pages/Home";
 import Layout from "src/components/Layout";
 import { ChakraProvider } from "@chakra-ui/react";
 import About from "./pages/About";
+import { useEffect } from "react";
+import Works from "./pages/Works";
 
 function App() {
+  const location = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    })
+  }, [location]);
+
+
   const elements = useRoutes([
     {
       path: "/",
       element: <Home />,
     },
     {
-      path: "/work",
-      element: <>Work</>,
+      path: "/works",
+      element: <Works />,
+    },
+    {
+      path: "/works/:id",
+      element: <>Work detail</>,
     },
     {
       path: "/contact",

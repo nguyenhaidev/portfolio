@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import reactjs from "../assets/images/react.png";
 import vuejs from "../assets/images/vue.png";
 import js from "../assets/images/js.png";
-import { Fade, useDisclosure } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const getPicture = (index: number) => {
   switch (index) {
@@ -20,18 +19,17 @@ const getPicture = (index: number) => {
 
 function About() {
   const [index, setIndex] = useState(0);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
-    onOpen();
     const timer = setInterval(() => {
-      onClose();
+      setShow(false);
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex >= 2 ? 0 : prevIndex + 1));
-      }, 400);
+      }, 1500);
       setTimeout(() => {
-        onOpen();
-      }, 400);
+        setShow(true);
+      }, 1500);
     }, 3000);
     return () => {
       clearInterval(timer);
@@ -49,20 +47,34 @@ function About() {
             <br />
             ReactJS and VueJS
           </p>
-          <Fade className="mb-5" in={isOpen}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: show ? 1 : 0 }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="mb-5"
+          >
             <img
               src={getPicture(index)}
               alt={getPicture(index)}
               className={`h-[400px] w-[400px] object-contain`}
             />
-          </Fade>
+          </motion.div>
         </div>
+      </div>
+      <div className="mb-8">
+        <img
+          src="./images/thumb.JPEG"
+          alt="thumb"
+          className="w-[100%] max-w-5xl"
+        />
       </div>
       <div id="summary" className="max-w-4xl w-full px-5 mt-10">
         <label htmlFor="summary" className="text-4xl font-bold">
           About.
         </label>
-        <p className="mt-5">
+        <div className="mt-5">
           <p className="text-xl font-semibold">
             Hi! My name is Nguyen Hai. Currently, I'm working as a frontend
             engineer. I have over 1+ year of experience in web development
@@ -73,7 +85,7 @@ function About() {
             <span className="text-sky-600"> TypeScript</span> , as well as
             excellent knowledge of the software development life cycle also.
           </p>
-          <p className="font-thin text-lg">
+          <div className="font-thin text-lg">
             <p className="mt-4">
               I have started working as a frontend developer since December,
               2021 up to now. At the end of this year, I graduated from
@@ -97,7 +109,7 @@ function About() {
               find it in link bellow:
             </p>
 
-            <div className="w-full mt-[3rem] duration-300 hover:translate-x-5 group">
+            <div className="w-full mt-4 duration-300 hover:translate-x-5 group">
               <a
                 className="text-cyan-500 hover:text-red-500 flex items-center gap-1"
                 href="https://drive.google.com/drive/folders/1e8R9NkCLmt5ZE8C8PUu3Ecily9UBNZMv?usp=sharing"
@@ -106,8 +118,8 @@ function About() {
                 <i className="fa-solid fa-angles-right group-hover:translate-x-1 " />
               </a>
             </div>
-          </p>
-        </p>
+          </div>
+        </div>
       </div>
     </div>
   );
