@@ -37,8 +37,8 @@ function About() {
   }, []);
 
   return (
-    <div className="w-full flex px-0 flex-col items-center">
-      <div className="h-full w-full min-h-600px md:min-h-screen flex items-center">
+    <div className="w-full flex px-0 flex-col items-center h-screen overflow-y-auto pb-[10rem]">
+      <div className="h-full w-full overflow-y-auto min-h-screen flex items-center">
         <div className="mx-5 w-full text-4xl md:text-8xl flex flex-col-reverse md:flex-row items-center justify-around font-semibold">
           <p className="self-start md:self-center">
             I build web

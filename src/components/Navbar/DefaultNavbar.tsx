@@ -31,8 +31,8 @@ export default function DefaultNavbar(props: DefaultNavbarProps) {
   return (
     <nav
       className={joinClass([
-        "flex justify-between items-stretch w-full px-0 sticky top-0 bg-black pt-3 z-10",
-        !isOpen && pathname !== "/" && "opacity-30 hover:opacity-100",
+        "flex justify-between items-stretch w-full px-0 fixed top-0 bg-black z-10 px-3",
+        // !isOpen && pathname !== "/" && "opacity-30 hover:opacity-100",
       ])}
     >
       <Link

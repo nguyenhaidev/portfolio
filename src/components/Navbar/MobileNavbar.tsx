@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { AppProps } from "src/types";
 import { NavbarItem } from "./Navbar";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { joinClass } from "src/services";
 import { motion } from "framer-motion";
 
@@ -36,6 +36,7 @@ const MobileNavbarItem = (props: MobileNavbarItemProps) => {
 function MobileNavbar(props: MobileNavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { navbarItems } = props;
+  const location = useLocation();
 
   useEffect(() => {
     setIsOpen(false);
@@ -44,6 +45,13 @@ function MobileNavbar(props: MobileNavbarProps) {
       setIsOpen(false);
     };
   }, []);
+
+  useEffect(() => {
+    setIsOpen(false);
+    return () => {
+      setIsOpen(false);
+    };
+  }, [location.pathname]);
 
   const renderNavbarItems = useCallback(
     () => navbarItems.map((e, idx) => <MobileNavbarItem key={idx} item={e} />),
@@ -78,7 +86,7 @@ function MobileNavbar(props: MobileNavbarProps) {
   );
 
   return (
-    <div className="flex py-3 w-full px-3 items-center justify-between sticky z-20 top-0 bg-black">
+    <div className="flex py-3 w-full px-3 items-center justify-between fixed z-20 top-0 bg-black">
       <Link
         to="/"
         className={joinClass([

@@ -10,11 +10,11 @@ function Footer(props: FooterProps) {
       {...props}
       className={joinClass([
         props.className,
-        "mt-[6rem] mb-3 flex flex-col w-full justify-center items-center",
+        "fixed sticky bottom-0 left-0 py-3 flex flex-col w-screen justify-center items-center bg-black",
       ])}
     >
       <div className="uppercase mb-3">find me on</div>
-      <div className="flex gap-3  text-2xl">
+      <div className="flex gap-3 text-2xl">
         <a
           href="https://www.linkedin.com/in/trong-hai-nguyen-7271471b0/"
           className="hover:text-cyan-500"

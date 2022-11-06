@@ -1,8 +1,16 @@
 import { motion } from "framer-motion";
-import { useCallback, useState } from "react";
+import _ from "lodash";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  useRef,
+  WheelEventHandler,
+} from "react";
 import { Link, NavLink } from "react-router-dom";
 import { joinClass } from "src/services";
 import { AppProps } from "src/types";
+import Intro from "./Intro";
 
 const style = {
   "font-satisfy": { fontFamily: '"Satisfy", sans-serif' },
@@ -24,22 +32,22 @@ const Home = () => {
       description:
         "Dolore cillum et nisi minim cillum. Enim dolor duis sunt cillum nostrud dolore ad ea excepteur proident mollit incididunt. Dolor nostrud sunt nostrud ullamco dolor minim aliqua. In laborum tempor consequat enim.",
     },
-    {
-      id: "123123",
-      label: "new post 2",
-      createdAt: new Date(),
-      imageUrl: "https://picsum.photos/601",
-      description:
-        "Dolore cillum et nisi minim cillum. Enim dolor duis sunt cillum nostrud dolore ad ea excepteur proident mollit incididunt. Dolor nostrud sunt nostrud ullamco dolor minim aliqua. In laborum tempor consequat enim.",
-    },
-    {
-      id: "123123",
-      label: "new post 3",
-      createdAt: new Date(),
-      imageUrl: "https://picsum.photos/599",
-      description:
-        "Dolore cillum et nisi minim cillum. Enim dolor duis sunt cillum nostrud dolore ad ea excepteur proident mollit incididunt. Dolor nostrud sunt nostrud ullamco dolor minim aliqua. In laborum tempor consequat enim.",
-    },
+    // {
+    //   id: "123123",
+    //   label: "new post 2",
+    //   createdAt: new Date(),
+    //   imageUrl: "https://picsum.photos/601",
+    //   description:
+    //     "Dolore cillum et nisi minim cillum. Enim dolor duis sunt cillum nostrud dolore ad ea excepteur proident mollit incididunt. Dolor nostrud sunt nostrud ullamco dolor minim aliqua. In laborum tempor consequat enim.",
+    // },
+    // {
+    //   id: "123123",
+    //   label: "new post 3",
+    //   createdAt: new Date(),
+    //   imageUrl: "https://picsum.photos/599",
+    //   description:
+    //     "Dolore cillum et nisi minim cillum. Enim dolor duis sunt cillum nostrud dolore ad ea excepteur proident mollit incididunt. Dolor nostrud sunt nostrud ullamco dolor minim aliqua. In laborum tempor consequat enim.",
+    // },
   ]);
 
   const [currentColor, setCurrentColor] = useState<string>();
@@ -115,45 +123,37 @@ const Home = () => {
   );
 
   return (
-    <div className="w-full max-w-3xl px-5 flex flex-col justify-start items-start">
-      <div className="introduce min-h-screen flex items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-          }}
-        >
-          <div className="text-5xl font-semibold">{renderTitle()}</div>
-          <div className="text-2xl italic mt-3" style={style["font-satisfy"]}>
-            I am a web developer based in Ho Chi Minh City, Viet Nam.
-            <br />
-            Currently, I'm working at
-            <span className="text-cyan-500 ml-2" style={style["font-satisfy"]}>
-              TMA Solution
-            </span>
+    <div className="w-full h-screen">
+      <div className="snap-mandatory snap-y w-full h-full overflow-auto">
+        <div className="snap-start h-screen introduce flex items-center justify-center snap-always">
+          <div className="max-w-3xl w-full px-3">
+            <Intro />
           </div>
-          <NavLink
-            to="/about"
-            className="flex items-center justify-center gap-2 mt-3 py-2 w-[100px] text-cyan-500 hover:text-zinc-200 border-cyan-500 border rounded-full hover:bg-cyan-500 shadow-lg hover:shadow-cyan-500/50"
-          >
-            <i className="fa-solid fa-magnifying-glass" /> About
-          </NavLink>
-        </motion.div>
-      </div>
-      <div id="recent-post">
-        <label htmlFor="recent-post" className="uppercase text-cyan-500">
-          Recent posts
-        </label>
-        <div className="mt-10">{renderPost()}</div>
-        <LinkButton className="mt-8" to="/blogs" label="More" />
-      </div>
-      <div id="project" className="mt-[5rem] w-full">
-        <label htmlFor="recent-post" className="uppercase text-cyan-500">
-          Works
-        </label>
-        <div className="mt-10">{renderWorkItem()}</div>
-        <LinkButton className="mt-8" to="/blogs" label="More" />
+        </div>
+        <div
+          id="recent-post"
+          className="h-screen snap-center snap-always flex justify-center items-center flex-col"
+        >
+          <div className="w-full max-w-3xl px-3">
+            <label htmlFor="recent-post" className="uppercase text-cyan-500">
+              Recent posts
+            </label>
+            <div className="mt-10">{renderPost()}</div>
+            <LinkButton className="mt-8" to="/blogs" label="More" />
+          </div>
+        </div>
+        <div
+          id="project"
+          className="h-screen w-full snap-center snap-always flex items-start flex-col justify-center items-center"
+        >
+          <div className="max-w-3xl w-full px-3">
+            <label htmlFor="recent-post" className="uppercase text-cyan-500">
+              Works
+            </label>
+            <div className="mt-10 w-full">{renderWorkItem()}</div>
+            <LinkButton className="mt-8" to="/blogs" label="More" />
+          </div>
+        </div>
       </div>
     </div>
   );

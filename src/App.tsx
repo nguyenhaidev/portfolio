@@ -1,6 +1,6 @@
 import { useLocation, useRoutes } from "react-router-dom";
 import "./App.css";
-import Home from "src/pages/Home";
+import Home from "src/pages/Home/Home";
 import Layout from "src/components/Layout";
 import { ChakraProvider } from "@chakra-ui/react";
 import About from "./pages/About";
@@ -8,15 +8,14 @@ import { useEffect } from "react";
 import Works from "./pages/Works";
 
 function App() {
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
-    })
+      behavior: "smooth",
+    });
   }, [location]);
-
 
   const elements = useRoutes([
     {
@@ -55,7 +54,7 @@ function App() {
   ]);
 
   return (
-    <div className="Apph-screen w-full m-h-screen flex justify-center items-baseline bg-black text-zinc-200">
+    <div className="Apph-screen w-full m-h-screen flex justify-center items-baseline bg-black text-zinc-200 fixed top-0">
       <ChakraProvider>
         <Layout>{elements}</Layout>
       </ChakraProvider>
