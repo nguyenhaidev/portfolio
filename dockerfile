@@ -1,5 +1,5 @@
 # Build stage
-FROM node:16:lts-alpine as build-stage
+FROM node:lts-alpine as build-stage
 # Set the working directory to /app inside the container
 WORKDIR /app
 # Copy app files
